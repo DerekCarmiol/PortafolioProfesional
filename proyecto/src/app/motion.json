@@ -1,0 +1,8 @@
+{
+  "keyframes": [
+    { "transform": "translateY(0)" },
+    { "transform": "translateY(-12px)" },
+    { "transform": "translateY(0)" }
+  ],
+  "options": { "duration": 5800, "iterations": 3, "easing": "ease-in-out" }
+}
