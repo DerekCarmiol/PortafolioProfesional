@@ -1,5 +1,5 @@
 export type Locale = "es" | "en";
-type Translation = { title: string; summary: string; detail: string };
+type Translation = { title: string; summary: string; detail: string; contribution?: string };
 type Project = {
   id: string;
   area: "apps" | "data";
@@ -41,12 +41,14 @@ export const projects: Project[] = [
     es: {
       title: "Proyecto de billetera digital",
       summary: "Solución académica centrada en el acceso a datos y la exploración de MetaMask.",
-      detail: "El trabajo se enfocó en la capa de acceso a datos de una solución para gestionar billeteras digitales. También se exploró una posible integración con MetaMask.",
+      detail: "Solución académica para gestionar billeteras digitales.",
+      contribution: "Trabajé en la capa de acceso a datos y exploré una posible integración con MetaMask.",
     },
     en: {
       title: "Digital Wallet Project",
       summary: "An academic project focused on data access and exploration of MetaMask.",
-      detail: "The work focused on the data access layer of a digital wallet management solution. A possible MetaMask integration was also explored.",
+      detail: "An academic solution for managing digital wallets.",
+      contribution: "I worked on the data access layer and explored a possible MetaMask integration.",
     },
   },
   {

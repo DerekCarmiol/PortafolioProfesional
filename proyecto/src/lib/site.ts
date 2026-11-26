@@ -27,9 +27,14 @@ export function metadataFor(locale: Locale): Metadata {
   const description = content[locale].intro;
   const siteUrl = process.env.SITE_URL;
   const icon = ["brand/favicon.ico", "brand/favicon.svg", "brand/favicon.png"].find(publicPath);
+  const tabIcon = "brand/favicon-tab.svg";
+  const icons = [
+    ...(icon ? [`/${icon}`] : []),
+    ...(publicPath(tabIcon) ? [{ url: `/${tabIcon}`, type: "image/svg+xml", sizes: "any" }] : []),
+  ];
   return {
     title, description,
-    ...(icon && { icons: { icon: `/${icon}` } }),
+    ...(icons.length > 0 && { icons: { icon: icons } }),
     ...(siteUrl && {
       metadataBase: new URL(siteUrl),
       alternates: { canonical: locale === "es" ? "/" : "/en", languages: { es: "/", en: "/en" } },

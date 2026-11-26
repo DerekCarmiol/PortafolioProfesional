@@ -11,8 +11,14 @@ export function DeveloperArt({ panel }: { panel: RefObject<SVGGElement | null> }
           <line y2="6" stroke="#e63946" strokeOpacity=".45" />
         </pattern>
         <linearGradient id="panel-shade" x1="110" y1="82" x2="425" y2="360" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#373738" />
-          <stop offset="1" stopColor="#252526" />
+          <stop stopColor="#55484c" />
+          <stop offset=".32" stopColor="#393437" />
+          <stop offset="1" stopColor="#252326" />
+        </linearGradient>
+        <linearGradient id="panel-edge" x1="100" y1="104" x2="417" y2="333" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#bca8ad" />
+          <stop offset=".48" stopColor="#6b5e63" />
+          <stop offset="1" stopColor="#c95c67" />
         </linearGradient>
         <linearGradient id="beam" x1="451" y1="0" x2="118" y2="444" gradientUnits="userSpaceOnUse">
           <stop stopColor="#e63946" stopOpacity="0" />
@@ -27,9 +33,10 @@ export function DeveloperArt({ panel }: { panel: RefObject<SVGGElement | null> }
       <path d="M458 59h44v44h-44zM57 355h34v34H57z" fill="url(#hatch)" opacity=".8" />
       <path d="M54 100h10m-5-5v10m428 268h10m-5-5v10M432 49h10m-5-5v10M101 416h10m-5-5v10" stroke="#e63946" strokeWidth="2" />
       <g ref={panel}>
-        <path d="M132 122h288a14 14 0 0 1 14 14v210H132z" fill="#171717" stroke="#4c4c50" transform="translate(20 19)" />
-        <path d="M113 104h288a14 14 0 0 1 14 14v202a13 13 0 0 1-13 13H113a13 13 0 0 1-13-13V117a13 13 0 0 1 13-13Z" fill="url(#panel-shade)" stroke="#78787e" />
-        <path d="M101 141h313" stroke="#58585e" />
+        <rect x="131" y="130" width="321" height="231" rx="14" fill="#201c20" fillOpacity=".85" stroke="#7c5960" />
+        <rect x="114" y="118" width="319" height="230" rx="14" fill="#2a2328" fillOpacity=".92" stroke="#76555c" />
+        <path d="M113 104h288a14 14 0 0 1 14 14v202a13 13 0 0 1-13 13H113a13 13 0 0 1-13-13V117a13 13 0 0 1 13-13Z" fill="url(#panel-shade)" stroke="url(#panel-edge)" />
+        <path d="M101 141h313" stroke="#796c73" />
         <circle cx="121" cy="123" r="4" fill="#e63946" />
         <circle cx="135" cy="123" r="4" fill="#8c8c91" />
         <circle cx="149" cy="123" r="4" fill="#65656a" />
@@ -38,7 +45,8 @@ export function DeveloperArt({ panel }: { panel: RefObject<SVGGElement | null> }
         <path d="M148 169h66m-47 63h50m-69 63h51" stroke="#fa616d" strokeWidth="5" strokeLinecap="round" />
         <path d="M167 190h81m-58 21h79m-102 42h98m-75 21h55" stroke="#b7b7bd" strokeOpacity=".72" strokeWidth="5" strokeLinecap="round" />
         <path d="M226 169h32m-17 63h24m-9 42h26" stroke="#717176" strokeWidth="5" strokeLinecap="round" />
-        <rect x="315" y="176" width="118" height="105" rx="9" fill="#242425" stroke="#e63946" />
+        <rect x="321" y="182" width="118" height="105" rx="9" fill="#1c161b" fillOpacity=".74" />
+        <rect x="315" y="176" width="118" height="105" rx="9" fill="#2d252a" stroke="#e63946" />
         <path d="m356 214-14 15 14 15m35-30 14 15-14 15m-10-34-15 38" stroke="#fa616d" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
         <circle cx="415" cy="333" r="3" fill="#e63946" />
       </g>
