@@ -1,7 +1,7 @@
 import { ArrowDown, ArrowRight, Braces, CodeXml, Database, Download, ExternalLink, GitFork, GraduationCap, Languages, Link, Mail, MapPin, MessageCircle, UsersRound, Wrench } from "lucide-react";
 import { anchors, content } from "../lib/content";
 import type { Locale } from "../lib/projects";
-import { contactReady, siteAssets } from "../lib/site";
+import { contactEndpoint, siteAssets } from "../lib/site";
 import { ContactForm, Gallery, HeroArt, Navigation, RevealOnScroll, ScrollTop } from "./interactions";
 
 const email = "derek.carmiol@gmail.com";
@@ -123,7 +123,7 @@ export function Portfolio({ locale }: { locale: Locale }) {
                 ) : <p>{t.cvMissing}</p>}
               </div>
             </div>
-            <ContactForm locale={locale} ready={contactReady()} />
+            <ContactForm locale={locale} ready={Boolean(contactEndpoint())} />
           </div>
         </section>
       </main>

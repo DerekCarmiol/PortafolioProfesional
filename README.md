@@ -21,9 +21,9 @@ Abre [localhost:3000](http://localhost:3000) para español o [localhost:3000/en]
 
 ## Formulario y despliegue
 
-1. Copia `proyecto/.env.example` a `proyecto/.env.local` para pruebas. Configura `RESEND_API_KEY`, `CONTACT_FROM` (remitente de un dominio verificado en Resend) y `CONTACT_TO` (buzón de destino).
-2. Importa el repositorio en Vercel, selecciona Next.js y fija **Root Directory** en `proyecto`. Añade las mismas variables para el entorno correspondiente. Define `SITE_URL` cuando esté confirmada la URL del sitio.
+1. Crea un formulario en Formspree y selecciona el correo verificado que recibirá los mensajes. En **Integration**, copia el ID que sigue a `/f/` en la URL del formulario. Para probar en local, copia `proyecto/.env.example` a `proyecto/.env.local` y guarda el ID en `FORMSPREE_FORM_ID`.
+2. Importa el repositorio en Vercel, selecciona Next.js y fija **Root Directory** en `proyecto`. El sitio usa el ID de Formspree del portafolio en producción. Puedes seleccionar otro formulario con `FORMSPREE_FORM_ID` o con `NEXT_PUBLIC_FORM` de la integración de Formspree en Vercel. Define `SITE_URL` cuando esté confirmada la URL del sitio.
 3. Antes de publicar, incorpora los recursos originales, confirma la selección de proyectos, la cuenta de WhatsApp y la aprobación del stack por el docente. Verifica que el formulario entregue un mensaje al buzón, prueba la descarga de los CV y comprueba las dos rutas de idioma.
 4. Registra la URL final del sitio y la del repositorio en el TXT para Moodle.
 
-El formulario valida los datos en el navegador y el servidor, rechaza orígenes cruzados y usa un campo trampa contra spam básico. Solo muestra confirmación si Resend devuelve un identificador. Mientras falten las variables, el formulario avisa y el correo directo sigue disponible.
+El formulario valida los datos en el navegador y el servidor, rechaza orígenes cruzados y usa un campo trampa contra spam básico. Muestra confirmación al recibir una respuesta de éxito de Formspree. Mientras falte el ID, el formulario avisa y el correo directo sigue disponible.

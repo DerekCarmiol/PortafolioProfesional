@@ -6,8 +6,11 @@ import type { Locale } from "./projects";
 
 const publicPath = (file: string) => existsSync(path.join(process.cwd(), "public", file));
 
-export function contactReady() {
-  return Boolean(process.env.RESEND_API_KEY && process.env.CONTACT_FROM && process.env.CONTACT_TO);
+export function contactEndpoint() {
+  // Formspree form IDs are public. Local and preview builds can use a separate form.
+  const productionFormId = process.env.VERCEL_ENV === "production" ? "xljbvvwk" : undefined;
+  const formId = process.env.FORMSPREE_FORM_ID?.trim() || process.env.NEXT_PUBLIC_FORM?.trim() || productionFormId;
+  return formId && /^[A-Za-z0-9]+$/.test(formId) ? `https://formspree.io/f/${formId}` : undefined;
 }
 
 export function siteAssets(locale: Locale) {

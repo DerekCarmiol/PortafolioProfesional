@@ -1,5 +1,5 @@
 import { emailPattern, inRange, limits } from "../../../lib/contact";
-import { contactReady } from "../../../lib/site";
+import { contactEndpoint } from "../../../lib/site";
 
 export async function POST(request: Request) {
   const requestUrl = new URL(request.url);
@@ -35,33 +35,35 @@ export async function POST(request: Request) {
   if (!inRange(name, limits.name) || email.length > 254 || !emailPattern.test(email) || !inRange(message, limits.message)) {
     return Response.json({ error: "validation" }, { status: 400 });
   }
-  if (!contactReady()) {
+  const endpoint = contactEndpoint();
+  if (!endpoint) {
     return Response.json({ error: "unavailable" }, { status: 503 });
   }
 
   try {
-    const delivery = await fetch("https://api.resend.com/emails", {
+    const delivery = await fetch(endpoint, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        Accept: "application/json",
         "Content-Type": "application/json",
       },
+      redirect: "error",
       signal: AbortSignal.timeout(8_000),
-      body: JSON.stringify({
-        from: process.env.CONTACT_FROM,
-        to: [process.env.CONTACT_TO],
-        reply_to: email,
-        subject: "Nuevo mensaje del portafolio",
-        text: `Nombre: ${name}\nCorreo: ${email}\n\n${message}`,
-      }),
+      body: JSON.stringify({ name, email, message }),
     });
 
     if (delivery.ok) {
-      const result = await delivery.json();
-      if (typeof result.id === "string") return Response.json({ ok: true });
+      const result: unknown = await delivery.json();
+      if (result && typeof result === "object" && "next" in result && typeof result.next === "string"
+        && !("error" in result) && !("errors" in result)) {
+        return Response.json({ ok: true });
+      }
+      console.warn("Formspree returned an unexpected contact response");
+    } else {
+      console.warn("Formspree rejected the contact submission", delivery.status);
     }
   } catch {
-    // Report provider errors to the form without sending private details to the browser.
+    console.warn("Formspree contact request failed");
   }
 
   return Response.json({ error: "delivery" }, { status: 502 });
